@@ -10,7 +10,12 @@
             <hr>
         </article>
 
-        <a href="/">Go back to the main page</a>
+        <div>
+            <a href="/article/{{$article->id}}/edit">Go to edit article</a>
+        </div>
+        <div>
+            <a href="/">Go back to the main page</a>
+        </div>
 
 @endsection
 

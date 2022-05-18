@@ -5,21 +5,22 @@
 
     @include('layout.errors')
 
+
     <form method="POST" action="/article">
 
         @csrf
 
         <div class="mb-3">
             <label for="exampleInputHeader" class="form-label">Header</label>
-            <input type="text" class="form-control" name="header" id="exampleInputHeader" placeholder="Add new header">
+            <input type="text" class="form-control" name="header" id="exampleInputHeader" placeholder="Add new header" value="{{old('header')}}">
         </div>
         <div class="mb-3">
             <label for="exampleInputContent" class="form-label">Content</label>
-            <textarea class="form-control" name="content" id="exampleInputContent" placeholder="Add new content"></textarea>
+            <textarea class="form-control" name="content" id="exampleInputContent" placeholder="Add new content">{{old('content')}}</textarea>
         </div>
         <div class="mb-3">
             <label for="exampleInputDescription" class="form-label">Description</label>
-            <textarea class="form-control" name="description" id="exampleInputDescription" placeholder="Add short description"></textarea>
+            <textarea class="form-control" name="description" id="exampleInputDescription" placeholder="Add short description">{{old('description')}}</textarea>
         </div>
         <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck">

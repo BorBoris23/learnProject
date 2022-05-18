@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 class Article extends Model
 {
     use HasFactory;
-    public $guarded = [];
+    public $fillable = ['header', 'content', 'description'];
 
     public static function getAllArticles()
     {
