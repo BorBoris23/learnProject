@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @mixin Builder
  */
-
 class Appeal extends Model
 {
     use HasFactory;

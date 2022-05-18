@@ -8,7 +8,7 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = (new Article)->getAllArticles();
+        $articles = (new Article)::getAllArticles();
 
         return view('index', compact('articles'));
     }

@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Builder;
 /**
  * @mixin Builder
  */
-
 class Article extends Model
 {
     use HasFactory;

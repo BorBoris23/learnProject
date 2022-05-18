@@ -13,7 +13,7 @@ class AdminController extends Controller
 
     public function show(Appeal $appeal)
     {
-        $appeals = (new Appeal)->getAllAppeals();
+        $appeals = (new Appeal)::getAllAppeals();
 
         return view('admin.feedback', compact('appeals'));
     }
