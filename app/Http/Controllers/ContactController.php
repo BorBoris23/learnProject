@@ -13,7 +13,7 @@ class ContactController extends Controller
 
     public function store()
     {
-        $this->validate(request(), [
+        request()->validate([
             'email' => 'required',
             'appealText' => 'required',
         ]);
