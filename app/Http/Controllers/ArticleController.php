@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends Controller
 {
@@ -26,11 +28,7 @@ class ArticleController extends Controller
 
     public function store()
     {
-        request()->validate([
-            'header' => 'required|min:5|max:100',
-            'content' => 'required',
-            'description' => 'required|max:255'
-        ]);
+        $this->validation();
 
         Article::create(request()->all());
 
@@ -44,11 +42,7 @@ class ArticleController extends Controller
 
     public function update(Article $article)
     {
-        request()->validate([
-            'header' => 'required|min:5|max:100',
-            'content' => 'required',
-            'description' => 'required|max:255'
-        ]);
+        $this->validation();
 
         $article->update([
             'header' => request('header'),
@@ -66,8 +60,13 @@ class ArticleController extends Controller
         return redirect('/');
     }
 
-    private function validationCheck()
+    private function validation()
     {
-
+        request()->validate([
+            'header' => 'required|min:5|max:100',
+            'content' => 'required',
+            'description' => 'required|max:255',
+            'uniqueCode' => 'required|regex:/[A-Za-z0-9-_]*/g'
+        ]);
     }
 }

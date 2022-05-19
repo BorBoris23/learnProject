@@ -18,6 +18,7 @@ class CreatedArticleTable extends Migration
             $table->string('header');
             $table->text('description');
             $table->text('content');
+            $table->string('uniqueCode')->unique();
             $table->timestamps();
         });
     }
