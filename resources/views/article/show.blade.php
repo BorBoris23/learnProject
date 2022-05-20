@@ -7,6 +7,7 @@
             <p class="blog-post-meta">{{$article->created_at}}</p>
             <p>Author - User</p>
             <p>{{$article->content}}</p>
+            @include('article.tags')
             <hr>
         </article>
 

@@ -16,6 +16,11 @@ class Article extends Model
 
     public static function getAllArticles()
     {
-        return static::latest('created_at')->get();
+        return static::with('tags')->latest('created_at')->get();
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }

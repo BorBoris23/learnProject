@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Tag;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends Controller
 {
-
     public function index()
     {
         $articles = (new Article)::getAllArticles();
@@ -50,6 +51,25 @@ class ArticleController extends Controller
             'description' => request('description')
         ]);
 
+        /**@var Collection $articleTags */
+        $articleTags = $article->tags->keyBy('name');
+
+        $tags = collect(explode(',' , request('tags')))->keyBy(function ($item) { return $item; });
+
+        $tagsToAdd = $tags->diffKeys($articleTags);
+        $tagsToDelete = $articleTags->diffKeys($tags);
+
+        foreach ($tagsToAdd as $tag) {
+            $tag = Tag::firstOrCreate(['name' => $tag]);
+            $article->tags()->attach($tag);
+        }
+
+        foreach ($tagsToDelete as $tag) {
+            $article->tags()->detach($tag);
+        }
+
+//        dd($tagsToAdd, $tagsToDelete);
+
         return redirect('/');
     }
 
@@ -66,7 +86,7 @@ class ArticleController extends Controller
             'header' => 'required|min:5|max:100',
             'content' => 'required',
             'description' => 'required|max:255',
-            'uniqueCode' => 'required|regex:/[A-Za-z0-9-_]*/g'
+            'uniqueCode' => 'required|regex:/[A-Za-z0-9-_]*/'
         ]);
     }
 }
