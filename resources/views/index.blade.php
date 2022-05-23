@@ -4,6 +4,8 @@
         <article class="blog-post">
             <h1 class="blog-post-title">Sample blog post</h1>
 
+            @include('layout.success')
+
             @foreach($articles as $article)
 
                 @include('article.item')

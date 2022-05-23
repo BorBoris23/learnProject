@@ -12,7 +12,7 @@
 </div>
 <div class="mb-3">
     <label for="exampleInputUniqueCode" class="form-label">Unique code</label>
-    <input type="text" class="form-control" name="header" id="exampleInputUniqueCode" placeholder="Add new header" value="{{old('uniqueCode', $article->uniqueCode ?? '') }}">
+    <input type="text" class="form-control" name="uniqueCode" id="exampleInputUniqueCode" placeholder="Add new unique code" value="{{old('uniqueCode', $article->uniqueCode ?? '') }}">
 </div>
 <div class="mb-3 form-check">
     <input type="checkbox" class="form-check-input" id="exampleCheck">

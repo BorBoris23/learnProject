@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreArticleRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -26,13 +27,13 @@ class ArticleController extends Controller
         return view('article.create');
     }
 
-    public function store()
+    public function store(StoreArticleRequest $request)
     {
-        $this->validation();
+        $validated = $request->validated();
 
-        Article::create(request()->all());
+        Article::create($validated);
 
-        return redirect('/');
+        return $this->redirect('New article created');
     }
 
     public function edit(Article $article)
@@ -40,33 +41,24 @@ class ArticleController extends Controller
         return view('article.edit', compact('article'));
     }
 
-    public function update(Article $article)
+    public function update(Article $article, StoreArticleRequest $request)
     {
-        $this->validation();
+        $validated = $request->validated();
 
-        $article->update([
-            'header' => request('header'),
-            'content' => request('content'),
-            'description' => request('description')
-        ]);
+        $article->update($validated);
 
-        return redirect('/');
+        return $this->redirect('Article updated');
     }
 
     public function destroy(Article $article)
     {
         $article->delete();
 
-        return redirect('/');
+        return $this->redirect('Article deleted');
     }
 
-    private function validation()
+    private function redirect($message)
     {
-        request()->validate([
-            'header' => 'required|min:5|max:100',
-            'content' => 'required',
-            'description' => 'required|max:255',
-            'uniqueCode' => 'required|regex:/[A-Za-z0-9-_]*/g'
-        ]);
+        return redirect('/')->with('message', $message);
     }
 }

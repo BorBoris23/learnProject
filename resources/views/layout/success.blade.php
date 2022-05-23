@@ -1,7 +1,7 @@
-@if($success->count())
+@if(session()->has('message'))
 
-    <div class="success alert-success mt-4">
-        article created successfully
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
     </div>
 
 @endif
