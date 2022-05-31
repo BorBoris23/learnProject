@@ -7,10 +7,9 @@
             <p class="blog-post-meta">{{$article->created_at}}</p>
             <p>Author - User</p>
             <p>{{$article->content}}</p>
-            @include('article.tags')
+            @include('article.tags', ['tags' => $article->tags])
             <hr>
         </article>
-
         <div>
             <a href="/article/{{$article->id}}/edit">Go to edit article</a>
         </div>

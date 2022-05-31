@@ -56,19 +56,16 @@ class ArticleController extends Controller
 
         $tags = collect(explode(',' , request('tags')))->keyBy(function ($item) { return $item; });
 
+        $syncIds = $articleTags->intersectByKeys($tags)->pluck('id')->toArray();
+
         $tagsToAdd = $tags->diffKeys($articleTags);
-        $tagsToDelete = $articleTags->diffKeys($tags);
 
         foreach ($tagsToAdd as $tag) {
             $tag = Tag::firstOrCreate(['name' => $tag]);
-            $article->tags()->attach($tag);
+            $syncIds[] = $tag->id;
         }
 
-        foreach ($tagsToDelete as $tag) {
-            $article->tags()->detach($tag);
-        }
-
-//        dd($tagsToAdd, $tagsToDelete);
+        $article->tags()->sync($syncIds);
 
         return redirect('/');
     }

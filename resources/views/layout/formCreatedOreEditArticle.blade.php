@@ -12,7 +12,7 @@
 </div>
 <div class="mb-3">
     <label for="exampleInputTags" class="form-label">Teg</label>
-    <input type="text" class="form-control" name="tags" id="exampleInputTags" placeholder="Add new tag" value="{{old('teg', $article->tags->pluck('name')->implode(',') ?? '') }}">
+    <input type="text" class="form-control" name="tags" id="exampleInputTags" placeholder="Add new tag" value="{{old('teg', (isset($article) ? $article->tags->pluck('name')->implode(',') : '') ) }}">
 </div>
 <div class="mb-3">
     <label for="exampleInputUniqueCode" class="form-label">Unique code</label>
@@ -22,4 +22,3 @@
     <input type="checkbox" class="form-check-input" id="exampleCheck">
     <label class="form-check-label" for="exampleCheck">published</label>
 </div>
-
