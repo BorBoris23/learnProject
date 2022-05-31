@@ -27,4 +27,9 @@ class Tag extends Model
     {
         return $this->belongsToMany(Article::class);
     }
+
+    public static function tagsCloud()
+    {
+        return (new static)->has('articles')->get();
+    }
 }
