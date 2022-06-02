@@ -4,12 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Tag;
+use App\Services\TagsSynchronizer;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends Controller
 {
+    private $tagService;
+
+    public function __construct(TagsSynchronizer $tagService)
+    {
+        $this->tagService = $tagService;
+    }
+
     public function index()
     {
         $articles = (new Article)::getAllArticles();
@@ -31,7 +39,11 @@ class ArticleController extends Controller
     {
         $this->validation();
 
-        Article::create(request()->all());
+        $article = Article::create(request()->all());
+
+        $tags = collect(explode(',' , request('tags')))->keyBy(function ($item) { return $item; });
+
+        $this->tagService->sync($tags, $article);
 
         return redirect('/');
     }
@@ -51,21 +63,9 @@ class ArticleController extends Controller
             'description' => request('description')
         ]);
 
-        /**@var Collection $articleTags */
-        $articleTags = $article->tags->keyBy('name');
-
         $tags = collect(explode(',' , request('tags')))->keyBy(function ($item) { return $item; });
 
-        $syncIds = $articleTags->intersectByKeys($tags)->pluck('id')->toArray();
-
-        $tagsToAdd = $tags->diffKeys($articleTags);
-
-        foreach ($tagsToAdd as $tag) {
-            $tag = Tag::firstOrCreate(['name' => $tag]);
-            $syncIds[] = $tag->id;
-        }
-
-        $article->tags()->sync($syncIds);
+        $this->tagService->sync($tags, $article);
 
         return redirect('/');
     }
