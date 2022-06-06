@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatedAppealTable extends Migration
+class CreatedTagTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreatedAppealTable extends Migration
      */
     public function up()
     {
-        Schema::create('appeals', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->string('email');
-            $table->text('appealText');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreatedAppealTable extends Migration
      */
     public function down()
     {
-        Schema::drop('appeals');
+        Schema::drop('tags');
     }
 }

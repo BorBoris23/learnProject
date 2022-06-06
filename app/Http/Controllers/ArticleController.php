@@ -4,11 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreArticleRequest;
 use App\Models\Article;
+use App\Models\Tag;
+use App\Services\TagsSynchronizer;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends Controller
 {
+    private $tagService;
+
+    public function __construct(TagsSynchronizer $tagService)
+    {
+        $this->tagService = $tagService;
+    }
 
     public function index()
     {
@@ -31,7 +40,11 @@ class ArticleController extends Controller
     {
         $validated = $request->validated();
 
-        Article::create($validated);
+        $article = Article::create($validated);
+
+        $tags = collect(explode(',' , request('tags')))->keyBy(function ($item) { return $item; });
+
+        $this->tagService->sync($tags, $article);
 
         return $this->redirect('New article created');
     }
@@ -47,7 +60,12 @@ class ArticleController extends Controller
 
         $article->update($validated);
 
+        $tags = collect(explode(',' , request('tags')))->keyBy(function ($item) { return $item; });
+
+        $this->tagService->sync($tags, $article);
+
         return $this->redirect('Article updated');
+
     }
 
     public function destroy(Article $article)
