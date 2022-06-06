@@ -37,8 +37,6 @@ class ArticleController extends Controller
 
     public function store()
     {
-        $this->validation();
-
         $article = Article::create(request()->all());
 
         $tags = collect(explode(',' , request('tags')))->keyBy(function ($item) { return $item; });
@@ -55,7 +53,6 @@ class ArticleController extends Controller
 
     public function update(Article $article)
     {
-        $this->validation();
 
         $article->update([
             'header' => request('header'),
@@ -75,15 +72,5 @@ class ArticleController extends Controller
         $article->delete();
 
         return redirect('/');
-    }
-
-    private function validation()
-    {
-        request()->validate([
-            'header' => 'required|min:5|max:100',
-            'content' => 'required',
-            'description' => 'required|max:255',
-            'uniqueCode' => 'required|regex:/[A-Za-z0-9-_]*/'
-        ]);
     }
 }
