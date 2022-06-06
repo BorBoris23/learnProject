@@ -11,14 +11,11 @@
     <textarea class="form-control" name="description" id="exampleInputDescription" placeholder="Add short description">{{old('description', $article->description ?? '') }}</textarea>
 </div>
 <div class="mb-3">
-    <label for="exampleInputTags" class="form-label">Teg</label>
-    <input type="text" class="form-control" name="tags" id="exampleInputTags" placeholder="Add new tag" value="{{old('teg', (isset($article) ? $article->tags->pluck('name')->implode(',') : '') ) }}">
-</div>
-<div class="mb-3">
     <label for="exampleInputUniqueCode" class="form-label">Unique code</label>
-    <input type="text" class="form-control" name="uniqueCode" id="exampleInputUniqueCode" placeholder="Add unique code" value="{{old('uniqueCode', $article->uniqueCode ?? '') }}">
+    <input type="text" class="form-control" name="uniqueCode" id="exampleInputUniqueCode" placeholder="Add new unique code" value="{{old('uniqueCode', $article->uniqueCode ?? '') }}">
 </div>
 <div class="mb-3 form-check">
     <input type="checkbox" class="form-check-input" id="exampleCheck">
     <label class="form-check-label" for="exampleCheck">published</label>
 </div>
+
