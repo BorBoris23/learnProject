@@ -73,4 +73,11 @@ class ArticleController extends Controller
 
         return redirect('/');
     }
+
+    public function destroy1(Article $article)
+    {
+        $article->delete();
+
+        return redirect('/');
+    }
 }
