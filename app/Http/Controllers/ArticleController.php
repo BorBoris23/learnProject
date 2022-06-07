@@ -4,11 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreArticleRequest;
 use App\Models\Article;
-use App\Models\Tag;
 use App\Services\TagsSynchronizer;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends Controller
 {
