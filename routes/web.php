@@ -23,6 +23,7 @@ Route::resource('about', AboutController::class);
 Route::resource('admin', AdminController::class);
 Route::resource('contact', ContactController::class);
 
+
 //Route::get('/', [ArticleController::class, 'index']);
 //Route::get('/about', [AboutController::class, 'index']);
 //Route::get('/admin', [AdminController::class, 'index']);
@@ -33,4 +34,7 @@ Route::resource('contact', ContactController::class);
 //Route::get('/article/{article}', [ArticleController::class, 'show']);
 //Route::get('/contact',[ContactController::class, 'index']);
 //Route::post('/contact', [ContactController::class, 'store']);
+
+
+
 
