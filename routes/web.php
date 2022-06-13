@@ -16,12 +16,14 @@ use App\Http\Controllers\AboutController;
  * PATCH /article/1 (update)
  * DELETE /article/1 (destroy)
  */
+
 Route::get('/articles/tags/{tag}', [TagController::class, 'index']);
 Route::resource('/', ArticleController::class);
 Route::resource('article', ArticleController::class);
 Route::resource('about', AboutController::class);
 Route::resource('admin', AdminController::class);
 Route::resource('contact', ContactController::class);
+
 
 
 //Route::get('/', [ArticleController::class, 'index']);
@@ -34,7 +36,6 @@ Route::resource('contact', ContactController::class);
 //Route::get('/article/{article}', [ArticleController::class, 'show']);
 //Route::get('/contact',[ContactController::class, 'index']);
 //Route::post('/contact', [ContactController::class, 'store']);
-
 
 
 
