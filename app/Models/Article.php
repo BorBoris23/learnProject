@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 class Article extends Model
 {
     use HasFactory;
-    public $fillable = ['header', 'content', 'description', 'uniqueCode'];
+    public $fillable = ['header', 'content', 'description', 'uniqueCode', 'owner_id'];
 
     public static function getAllArticles()
     {
@@ -22,5 +22,10 @@ class Article extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArticleRequest;
 use App\Models\Article;
 use App\Services\TagsSynchronizer;
+use Illuminate\Support\Facades\Auth;
+
 
 class ArticleController extends Controller
 {
@@ -12,6 +14,10 @@ class ArticleController extends Controller
 
     public function __construct(TagsSynchronizer $tagService)
     {
+        $this->middleware('auth')->only('create', 'store', 'update', 'show');
+
+        $this->middleware('can:update,article')->except('index', 'store', 'create', 'show');
+
         $this->tagService = $tagService;
     }
 
@@ -29,8 +35,8 @@ class ArticleController extends Controller
 
     public function create()
     {
-        $this->middleware('auth');
-        return view('article.create');
+        $user = Auth::user();
+        return view('article.create', compact('user'));
     }
 
     public function store(StoreArticleRequest $request)
@@ -48,7 +54,8 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
-        return view('article.edit', compact('article'));
+        $user = Auth::user();
+        return view('article.edit', compact('article', 'user'));
     }
 
     public function update(Article $article, StoreArticleRequest $request)

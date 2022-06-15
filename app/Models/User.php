@@ -2,72 +2,43 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-/**
- * @mixin Builder
- */
-class User extends Model implements Authenticatable
+class User extends Authenticatable
 {
-    public $fillable = ['name', 'email', 'password'];
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
-     * {@inheritDoc}
-     * @see \Illuminate\Contracts\Auth\Authenticatable::getAuthIdentifierName()
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
      */
-    public function getAuthIdentifierName()
-    {
-        return "username";
-    }
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
 
     /**
-     * {@inheritDoc}
-     * @see \Illuminate\Contracts\Auth\Authenticatable::getAuthIdentifier()
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
      */
-    public function getAuthIdentifier()
-    {
-        return $this->{$this->getAuthIdentifierName()};
-    }
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
     /**
-     * {@inheritDoc}
-     * @see \Illuminate\Contracts\Auth\Authenticatable::getAuthPassword()
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
      */
-    public function getAuthPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see \Illuminate\Contracts\Auth\Authenticatable::getRememberToken()
-     */
-    public function getRememberToken()
-    {
-        if (! empty($this->getRememberTokenName())) {
-            return $this->{$this->getRememberTokenName()};
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see \Illuminate\Contracts\Auth\Authenticatable::setRememberToken()
-     */
-    public function setRememberToken($value)
-    {
-        if (! empty($this->getRememberTokenName())) {
-            $this->{$this->getRememberTokenName()} = $value;
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see \Illuminate\Contracts\Auth\Authenticatable::getRememberTokenName()
-     */
-    public function getRememberTokenName()
-    {
-        return $this->rememberTokenName;
-    }
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 }

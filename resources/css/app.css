@@ -111,9 +111,24 @@ h1, h2, h3, h4, h5, h6 {
     border-color: #0d6efd;
 }
 
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
 a {
     color: #0d6efd;
     text-decoration: underline;
 }
 
+h3 {
+    font-size: 1.75rem;
+    margin-top: 15px;
+}
+
+p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
