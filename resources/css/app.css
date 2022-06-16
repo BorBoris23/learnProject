@@ -1,5 +1,8 @@
-/* stylelint-disable selector-list-comma-newline-after */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* stylelint-disable selector-list-comma-newline-after */
 .blog-header {
     line-height: 1;
     border-bottom: 1px solid #e5e5e5;
@@ -101,3 +104,31 @@ h1, h2, h3, h4, h5, h6 {
 .blog-footer p:last-child {
     margin-bottom: 0;
 }
+
+.btn-primary {
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+a {
+    color: #0d6efd;
+    text-decoration: underline;
+}
+
+h3 {
+    font-size: 1.75rem;
+    margin-top: 15px;
+}
+
+p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+

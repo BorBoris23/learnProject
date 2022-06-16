@@ -28,6 +28,7 @@ class StoreArticleRequest extends FormRequest
             'header' => 'required|min:5|max:100',
             'content' => 'required',
             'description' => 'required|max:255',
+            'owner_id' => 'required',
             'uniqueCode' => [
                 'required',
                 'regex:/^[-_0-9a-z]+$/i',

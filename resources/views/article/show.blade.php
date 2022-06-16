@@ -10,9 +10,13 @@
             @include('article.tags', ['tags' => $article->tags])
             <hr>
         </article>
-        <div>
-            <a href="/article/{{$article->id}}/edit">Go to edit article</a>
-        </div>
+
+        @can('update', $article)
+            <div>
+                <a href="/article/{{$article->id}}/edit">Go to edit article</a>
+            </div>
+        @endcan
+
         <div>
             <a href="/">Go back to the main page</a>
         </div>

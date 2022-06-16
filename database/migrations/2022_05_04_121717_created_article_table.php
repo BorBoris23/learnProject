@@ -18,8 +18,11 @@ class CreatedArticleTable extends Migration
             $table->string('header');
             $table->text('description');
             $table->text('content');
+            $table->foreignId('owner_id');
             $table->string('uniqueCode')->unique();
             $table->timestamps();
+
+            $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -20,6 +20,7 @@ class ArticlesSeeder extends Seeder
             'description' => 'description1',
             'content' => 'content1',
             'uniqueCode' => 'uniqueCode1',
+            'owner_id' => 2,
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
@@ -28,6 +29,7 @@ class ArticlesSeeder extends Seeder
             'description' => 'description2',
             'content' => 'content2',
             'uniqueCode' => 'uniqueCode2',
+            'owner_id' => 2,
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
@@ -36,6 +38,7 @@ class ArticlesSeeder extends Seeder
             'description' => 'description3',
             'content' => 'content3',
             'uniqueCode' => 'uniqueCode3',
+            'owner_id' => 2,
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
@@ -44,6 +47,7 @@ class ArticlesSeeder extends Seeder
             'description' => 'description4',
             'content' => 'content4',
             'uniqueCode' => 'uniqueCode4',
+            'owner_id' => 3,
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
@@ -52,6 +56,7 @@ class ArticlesSeeder extends Seeder
             'description' => 'description5',
             'content' => 'content5',
             'uniqueCode' => 'uniqueCode5',
+            'owner_id' => 3,
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
