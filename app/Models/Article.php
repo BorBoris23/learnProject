@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Events\Article\ArticleCreated;
+use App\Events\Article\ArticleDestroy;
+use App\Events\Article\ArticleEdit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,7 +15,14 @@ use Illuminate\Database\Eloquent\Builder;
 class Article extends Model
 {
     use HasFactory;
+
     public $fillable = ['header', 'content', 'description', 'uniqueCode', 'owner_id'];
+
+    protected $dispatchesEvents = [
+        'created' => ArticleCreated::class,
+        'deleted' => ArticleDestroy::class,
+        'updated' => ArticleEdit::class,
+    ];
 
     public static function getAllArticles()
     {
@@ -24,7 +34,7 @@ class Article extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public function user()
+    public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id');
     }
