@@ -34,7 +34,7 @@
             <a class="p-2 link-secondary" href="/about">About Us</a>
             <a class="p-2 link-secondary" href="/contact">Contact</a>
             <a class="p-2 link-secondary" href="/article/create">Created article</a>
-            <a class="p-2 link-secondary" href="/admin">Admin</a>
+            @admin($user->roles)
         </nav>
     </div>
 </div>

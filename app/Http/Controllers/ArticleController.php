@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreArticleRequest;
-use App\Mail\ArticleDestroy;
 use App\Models\Article;
 use App\Services\TagsSynchronizer;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
 {
@@ -77,10 +75,6 @@ class ArticleController extends Controller
 
     public function destroy(Article $article)
     {
-//        Mail::to('admin@mail.ru')->send(
-//            new ArticleDestroy($article)
-//        );
-
         $article->delete();
 
         return $this->redirect('Article deleted');

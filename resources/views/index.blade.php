@@ -6,11 +6,7 @@
 
             @include('layout.success')
 
-            @foreach($articles as $article)
-
-                @include('article.item')
-
-            @endforeach
+            @each('article.item', $articles, 'article')
 
         </article>
 

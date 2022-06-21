@@ -42,17 +42,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-//        Event::listen(ArticleCreated::class, SendArticleCreatedNotification::class);
-//        Event::listen(ArticleDestroy::class, SendArticleDestroyNotification::class);
-//        Event::listen(Registered::class, SendEmailVerificationNotification::class);
-    }
 
-//    /**
-//     * The subscriber classes to register.
-//     *
-//     * @var array
-//     */
-//    protected $subscribe = [
-//        ArticleEventSubscriber::class,
-//    ];
+    }
 }
