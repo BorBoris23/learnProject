@@ -55,5 +55,8 @@
                 </x-button>
             </div>
         </form>
+        <div>
+            <a href="/">Go back to the main page</a>
+        </div>
     </x-auth-card>
 </x-guest-layout>

@@ -24,8 +24,16 @@
 <div class="mb-3">
     <input type="hidden" name="owner_id" value="{{$user->id ?? ''}}">
 </div>
-<div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck">
-    <label class="form-check-label" for="exampleCheck">published</label>
-</div>
+
+@if(in_array('admin', $user->roles()->pluck('name')->toArray()))
+    <div class="mb-3 form-check">
+        @if(isset($article) && $article->public === 'yes')
+            <input type="checkbox" name="public" class="form-check-input" id="exampleCheck" checked>
+        @else
+            <input type="checkbox" name="public" class="form-check-input" id="exampleCheck">
+        @endif
+        <label class="form-check-label" for="exampleCheck">published</label>
+    </div>
+@endif
+
 

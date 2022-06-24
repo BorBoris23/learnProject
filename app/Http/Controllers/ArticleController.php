@@ -7,7 +7,6 @@ use App\Models\Article;
 use App\Services\TagsSynchronizer;
 use Illuminate\Support\Facades\Auth;
 
-
 class ArticleController extends Controller
 {
     private $tagService;
@@ -23,9 +22,11 @@ class ArticleController extends Controller
 
     public function index()
     {
-        $articles = (new Article)::getAllArticles();
+        $articles = (new Article)::getAllPublicArticles();
 
-        return view('index', compact('articles'));
+        $user = Auth::user();
+
+        return view('index', compact('articles', 'user'));
     }
 
     public function show(Article $article)
@@ -36,6 +37,7 @@ class ArticleController extends Controller
     public function create()
     {
         $user = Auth::user();
+
         return view('article.create', compact('user'));
     }
 
@@ -55,6 +57,7 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         $user = Auth::user();
+
         return view('article.edit', compact('article', 'user'));
     }
 
@@ -63,6 +66,8 @@ class ArticleController extends Controller
         $validated = $request->validated();
 
         $article->update($validated);
+
+        $this->publish($article, $request['public']);
 
         $tags = collect(explode(',' , request('tags')))->keyBy(function ($item) { return $item; });
 
@@ -82,5 +87,15 @@ class ArticleController extends Controller
     private function redirect($message)
     {
         return redirect('/')->with('message', $message);
+    }
+
+    private function publish(Article $article, $public)
+    {
+        if($public === 'on') {
+            $article->public = 'yes';
+        } else {
+            $article->public = 'no';
+        }
+        $article->save();
     }
 }

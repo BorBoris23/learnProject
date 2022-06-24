@@ -2,8 +2,5 @@
 
 namespace App\Classes;
 
-class FormRequest
-{
-
-}
+class FormRequest{}
 
