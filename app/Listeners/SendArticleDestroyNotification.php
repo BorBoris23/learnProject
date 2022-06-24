@@ -25,6 +25,6 @@ class SendArticleDestroyNotification
      */
     public function handle(ArticleDestroy $event)
     {
-        Mail::to('admin@mail.ru')->send(new \App\Mail\Article\ArticleDestroy($event->article));
+        Mail::to('admin@mail.ru')->send(new \App\Mail\Article\DestroyArticle($event->article));
     }
 }

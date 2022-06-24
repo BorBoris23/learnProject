@@ -2,7 +2,7 @@
 
 namespace App\Mail\Article;
 
-class ArticleEdit extends ArticleMail
+class EditArticle extends ArticleMail
 {
     /**
      * Build the message.

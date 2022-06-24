@@ -16,7 +16,7 @@ class Article extends Model
 {
     use HasFactory;
 
-    public $fillable = ['header', 'content', 'description', 'uniqueCode', 'owner_id'];
+    public $fillable = ['header', 'content', 'description', 'uniqueCode', 'owner_id', 'public'];
 
     protected $dispatchesEvents = [
         'created' => ArticleCreated::class,
@@ -27,6 +27,11 @@ class Article extends Model
     public static function getAllArticles()
     {
         return static::with('tags')->latest('created_at')->get();
+    }
+
+    public static function getAllPublicArticles()
+    {
+        return static::with('tags')->where('public', '=', 'yes')->latest('created_at')->get();
     }
 
     public function tags()

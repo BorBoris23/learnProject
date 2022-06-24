@@ -3,8 +3,8 @@
 @section('content')
 
     <div class="list-group">
-        <a href="/admin/feedback" class="list-group-item list-group-item-action">feedback</a>
-        <a href="#" class="list-group-item list-group-item-action list-group-item-primary">A simple primary list group item</a>
+        <a href="/admin/feedback" class="list-group-item list-group-item-action">Feedback</a>
+        <a href="/admin/articleControl" class="list-group-item list-group-item-action list-group-item-primary">Article control room</a>
         <a href="#" class="list-group-item list-group-item-action list-group-item-secondary">A simple secondary list group item</a>
         <a href="#" class="list-group-item list-group-item-action list-group-item-success">A simple success list group item</a>
         <a href="#" class="list-group-item list-group-item-action list-group-item-danger">A simple danger list group item</a>

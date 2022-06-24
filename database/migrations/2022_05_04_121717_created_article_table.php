@@ -20,6 +20,7 @@ class CreatedArticleTable extends Migration
             $table->text('content');
             $table->foreignId('owner_id');
             $table->string('uniqueCode')->unique();
+            $table->string('public');
             $table->timestamps();
 
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');

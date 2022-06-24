@@ -25,6 +25,6 @@ class SendArticleEditNotification
      */
     public function handle(ArticleEdit $event)
     {
-        Mail::to('admin@mail.ru')->send(new \App\Mail\Article\ArticleEdit($event->article));
+        Mail::to('admin@mail.ru')->send(new \App\Mail\Article\EditArticle($event->article));
     }
 }

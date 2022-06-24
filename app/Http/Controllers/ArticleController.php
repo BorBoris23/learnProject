@@ -22,9 +22,11 @@ class ArticleController extends Controller
 
     public function index()
     {
-        $articles = (new Article)::getAllArticles();
+        $articles = (new Article)::getAllPublicArticles();
 
-        return view('index', compact('articles'));
+        $user = Auth::user();
+
+        return view('index', compact('articles', 'user'));
     }
 
     public function show(Article $article)
@@ -65,6 +67,8 @@ class ArticleController extends Controller
 
         $article->update($validated);
 
+        $this->publish($article, $request['public']);
+
         $tags = collect(explode(',' , request('tags')))->keyBy(function ($item) { return $item; });
 
         $this->tagService->sync($tags, $article);
@@ -83,5 +87,15 @@ class ArticleController extends Controller
     private function redirect($message)
     {
         return redirect('/')->with('message', $message);
+    }
+
+    private function publish(Article $article, $public)
+    {
+        if($public === 'on') {
+            $article->public = 'yes';
+        } else {
+            $article->public = 'no';
+        }
+        $article->save();
     }
 }

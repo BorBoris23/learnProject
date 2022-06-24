@@ -2,7 +2,7 @@
 
 namespace App\Mail\Article;
 
-class ArticleDestroy extends ArticleMail
+class DestroyArticle extends ArticleMail
 {
     /**
      * Build the message.

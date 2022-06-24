@@ -21,7 +21,11 @@ Route::get('/articles/tags/{tag}', [TagController::class, 'index']);
 Route::resource('/', ArticleController::class);
 Route::resource('article', ArticleController::class);
 Route::resource('about', AboutController::class);
-Route::resource('admin', AdminController::class);
+
+Route::get('admin', [AdminController::class, 'index']);
+Route::get('admin/feedback/', [AdminController::class, 'showAppeals']);
+Route::get('admin/articleControl/', [AdminController::class, 'showArticles']);
+
 Route::resource('contact', ContactController::class);
 
 
@@ -29,7 +33,7 @@ Route::resource('contact', ContactController::class);
 //Route::get('/about', [AboutController::class, 'index']);
 //Route::get('/admin', [AdminController::class, 'index']);
 //Route::get('/admin/feedback', [AdminController::class, 'show']);
-//
+
 //Route::get('/article/create',[ArticleController::class, 'create']);
 //Route::post('/article', [ArticleController::class, 'store']);
 //Route::get('/article/{article}', [ArticleController::class, 'show']);

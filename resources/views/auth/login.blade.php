@@ -51,6 +51,9 @@
                     {{ __('Log in') }}
                 </x-button>
             </div>
+            <div>
+                <a href="/">Go back to the main page</a>
+            </div>
         </form>
     </x-auth-card>
 </x-guest-layout>
