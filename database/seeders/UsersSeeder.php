@@ -1,6 +1,8 @@
 <?php
 namespace Database\Seeders;
 
+use App\Models\Article;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -20,27 +22,10 @@ class UsersSeeder extends Seeder
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
-        DB::table('users')->insert([
-            'name' => 'Sergio',
-            'email' => 'sergio@mail.ru',
-            'password' => bcrypt('123'),
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
-        ]);
-        DB::table('users')->insert([
-            'name' => 'Helena',
-            'email' => 'helena@mail.ru',
-            'password' => bcrypt('123'),
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
-        ]);
-        DB::table('users')->insert([
-            'name' => 'Jack',
-            'email' => 'jack@mail.ru',
-            'password' => bcrypt('123'),
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
-        ]);
+
+        User::factory()
+            ->count(10)
+            ->create();
     }
 }
 

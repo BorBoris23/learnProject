@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class UserFactory extends Factory
+class ArticleFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,11 +15,12 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => bcrypt('123'),
-            'remember_token' => Str::random(10),
+            'header' => $this->faker->sentence($nbWords = 3, $variableNbWords = true),
+            'description' => $this->faker->text(),
+            'content' => $this->faker->text(),
+            'uniqueCode' => $this->faker->unique()->word(),
+            'owner_id' => $this->faker->randomElement($array = array (2,3,4,5,6,7,8,9)),
+            'public' => array_rand(['yes', 'no']),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ];

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             ArticlesSeeder::class,
             AppealsSeeder::class,
             TagsSeeder::class,
-            ArticlTagSeeder::class,
+            ArticleTagSeeder::class,
             UserRoleSeeder::class,
         ]);
     }
