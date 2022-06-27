@@ -6,6 +6,7 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Models\Article;
 use App\Services\TagsSynchronizer;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 class ArticleController extends Controller
 {
@@ -22,7 +23,7 @@ class ArticleController extends Controller
 
     public function index()
     {
-        $articles = (new Article)::getAllPublicArticles();
+        $articles = Article::getAllPublicArticles();
 
         $user = Auth::user();
 
@@ -38,7 +39,9 @@ class ArticleController extends Controller
     {
         $user = Auth::user();
 
-        return view('article.create', compact('user'));
+        $routName = Route::current()->getName();
+
+        return view('article.create', compact('user', 'routName'));
     }
 
     public function store(StoreArticleRequest $request)
@@ -58,7 +61,9 @@ class ArticleController extends Controller
     {
         $user = Auth::user();
 
-        return view('article.edit', compact('article', 'user'));
+        $routName = Route::current()->getName();
+
+        return view('article.edit', compact('article', 'user', 'routName'));
     }
 
     public function update(Article $article, StoreArticleRequest $request)
@@ -92,9 +97,9 @@ class ArticleController extends Controller
     private function publish(Article $article, $public)
     {
         if($public === 'on') {
-            $article->public = 'yes';
+            $article->public = 1;
         } else {
-            $article->public = 'no';
+            $article->public = 0;
         }
         $article->save();
     }

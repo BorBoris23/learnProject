@@ -31,7 +31,7 @@ class Article extends Model
 
     public static function getAllPublicArticles()
     {
-        return static::with('tags')->where('public', '=', 'yes')->latest('created_at')->get();
+        return static::with('tags')->where('public', '=', 1)->latest('created_at')->get();
     }
 
     public function tags()

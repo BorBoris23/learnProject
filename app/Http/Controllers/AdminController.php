@@ -6,6 +6,7 @@ use App\Models\Appeal;
 use App\Models\Article;
 use Illuminate\Foundation\Http\FormRequest;
 
+
 class AdminController extends Controller
 {
     public function index()
@@ -15,14 +16,14 @@ class AdminController extends Controller
 
     public function showAppeals()
     {
-        $appeals = (new Appeal)::getAllAppeals();
+        $appeals = Appeal::getAllAppeals();
 
         return view('admin.feedback', compact('appeals'));
     }
 
     public function showArticles()
     {
-        $articles = (new Article)::getAllArticles();
+        $articles = Article::getAllArticles();
 
         return view('admin.articleСontrol', compact('articles'));
     }

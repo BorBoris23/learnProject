@@ -31,12 +31,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with('tagsCloud', Tag::tagsCloud());
         });
 
-//        Blade::directive('admin', function () {
-//            if(in_array('admin', Auth::user()->roles()->pluck('name')->toArray())) {
-//                return '<a class="p-2 link-secondary" href="/admin">Admin</a>';
-//            }
-//        });
-
         Blade::directive('admin', function () {
             return '<a class="p-2 link-secondary" href="/admin">Admin</a>';
         });
