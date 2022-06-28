@@ -15,14 +15,14 @@ class AdminController extends Controller
 
     public function showAppeals()
     {
-        $appeals = (new Appeal)::getAllAppeals();
+        $appeals = Appeal::getAllAppeals();
 
         return view('admin.feedback', compact('appeals'));
     }
 
     public function showArticles()
     {
-        $articles = (new Article)::getAllArticles();
+        $articles = Article::getAllArticles();
 
         return view('admin.articleСontrol', compact('articles'));
     }

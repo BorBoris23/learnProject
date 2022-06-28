@@ -22,7 +22,7 @@ class ArticleController extends Controller
 
     public function index()
     {
-        $articles = (new Article)::getAllPublicArticles();
+        $articles = Article::getAllPublicArticles();
 
         $user = Auth::user();
 

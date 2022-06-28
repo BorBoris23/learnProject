@@ -15,7 +15,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('send:newArticle')
+            ->weeklyOn(1, '8:00');
+//            ->everyMinute();
     }
 
     /**
