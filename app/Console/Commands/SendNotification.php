@@ -24,16 +24,6 @@ class SendNotification extends Command
     protected $description = 'Send notification about new article';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return int
@@ -43,8 +33,6 @@ class SendNotification extends Command
         $users = User::getAllUsers();
 
         $articles = Article::getAllArticlesForWeek();
-
-
 
         foreach ($users as $user) {
             $user->notify(new NewArticles($articles, $user));

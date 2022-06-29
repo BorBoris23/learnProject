@@ -16,7 +16,8 @@ use Illuminate\Support\Carbon;
  */
 class Article extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
 
     public $fillable = ['header', 'content', 'description', 'uniqueCode', 'owner_id', 'public'];
 
@@ -50,6 +51,6 @@ class Article extends Model
     {
         $start = Carbon::now()->subWeek()->startOfWeek();
         $end = Carbon::now()->subWeek()->endOfWeek();
-        return static::where('public', '=', 1)->whereBetween('created_at', [$start, $end])->take(100)->get();
+        return static::where('public', '=', 1)->whereBetween('created_at', [$start, $end])->get();
     }
 }

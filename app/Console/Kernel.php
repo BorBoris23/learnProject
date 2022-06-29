@@ -17,7 +17,6 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('send:newArticle')
             ->weeklyOn(1, '8:00');
-//            ->everyMinute();
     }
 
     /**
