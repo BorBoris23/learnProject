@@ -6,6 +6,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
+//use App\Http\Controllers\PushAllServiceController;
 
 /**
  * GET /article (index)
@@ -28,6 +29,7 @@ Route::get('admin/articleControl/', [AdminController::class, 'showArticles']);
 
 Route::resource('contact', ContactController::class);
 
+//Route::post('/article', [PushAllServiceController::class, 'send']);
 
 //Route::get('/', [ArticleController::class, 'index']);
 //Route::get('/about', [AboutController::class, 'index']);
