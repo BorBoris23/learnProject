@@ -7,7 +7,7 @@ class PushAll
     private $id;
     private $apiKey;
 
-    protected $url = 'https://pushall.ru/api.php';
+    protected  $url = 'https://pushall.ru/api.php';
 
     public function __construct($apiKey, $id)
     {
