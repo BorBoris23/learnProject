@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreArticleRequest;
 use App\Models\Article;
+use App\Services\PushAll;
 use App\Services\TagsSynchronizer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -44,11 +45,13 @@ class ArticleController extends Controller
         return view('article.create', compact('user', 'routName'));
     }
 
-    public function store(StoreArticleRequest $request)
+    public function store(PushAll $pushAll, StoreArticleRequest $request)
     {
         $validated = $request->validated();
 
         $article = Article::create($validated);
+
+        $pushAll->send('new article created', $article->header);
 
         $tags = collect(explode(',' , request('tags')))->keyBy(function ($item) { return $item; });
 
@@ -102,5 +105,10 @@ class ArticleController extends Controller
             $article->public = 0;
         }
         $article->save();
+    }
+
+    private function send(PushAll $pushAll,Article $article)
+    {
+        $pushAll->send('new article created', $article->header);
     }
 }

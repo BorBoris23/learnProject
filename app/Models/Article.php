@@ -8,6 +8,8 @@ use App\Events\Article\ArticleEdit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
 
 /**
  * @mixin Builder
@@ -15,6 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
 class Article extends Model
 {
     use HasFactory;
+    use Notifiable;
 
     public $fillable = ['header', 'content', 'description', 'uniqueCode', 'owner_id', 'public'];
 
@@ -42,5 +45,12 @@ class Article extends Model
     public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    public static function getAllArticlesForWeek()
+    {
+        $start = Carbon::now()->subWeek()->startOfWeek();
+        $end = Carbon::now()->subWeek()->endOfWeek();
+        return static::where('public', '=', 1)->whereBetween('created_at', [$start, $end])->get();
     }
 }

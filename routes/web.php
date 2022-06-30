@@ -29,16 +29,5 @@ Route::get('admin/articleControl/', [AdminController::class, 'showArticles']);
 Route::resource('contact', ContactController::class);
 
 
-//Route::get('/', [ArticleController::class, 'index']);
-//Route::get('/about', [AboutController::class, 'index']);
-//Route::get('/admin', [AdminController::class, 'index']);
-//Route::get('/admin/feedback', [AdminController::class, 'show']);
-
-//Route::get('/article/create',[ArticleController::class, 'create']);
-//Route::post('/article', [ArticleController::class, 'store']);
-//Route::get('/article/{article}', [ArticleController::class, 'show']);
-//Route::get('/contact',[ContactController::class, 'index']);
-//Route::post('/contact', [ContactController::class, 'store']);
-
 
 
