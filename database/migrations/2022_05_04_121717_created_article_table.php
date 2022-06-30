@@ -22,7 +22,6 @@ class CreatedArticleTable extends Migration
             $table->string('uniqueCode')->unique();
             $table->string('public')->default(0);
             $table->timestamps();
-
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

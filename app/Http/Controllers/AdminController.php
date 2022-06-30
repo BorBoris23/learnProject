@@ -6,6 +6,7 @@ use App\Models\Appeal;
 use App\Models\Article;
 use Illuminate\Foundation\Http\FormRequest;
 
+
 class AdminController extends Controller
 {
     public function index()
