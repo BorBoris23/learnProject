@@ -9,7 +9,26 @@
             <p>{{$article->content}}</p>
             @include('article.tags', ['tags' => $article->tags])
             <hr>
+            @include('comment.show', ['comments' => $article->comments()->get()])
+            <hr>
         </article>
+
+        <form method="POST" action="/article/{{$article->id}}">
+            @csrf
+            <div class="mb-3">
+                <label for="exampleCommentText" class="form-label">Comment</label>
+                <textarea class="form-control" name="commentText" id="exampleCommentText" placeholder="Add new comment"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add comment</button>
+        </form>
+
+        <hr>
+
+        @forelse($article->history as $history)
+            <p>{{ $history->email }} - {{ $history->pivot->created_at->diffForHumans() }} - {{ $history->pivot->before }} - {{ $history->pivot->now }}</p>
+        @empty
+            <p>no history</p>
+        @endforelse
 
         @can('update', $article)
             <div>
