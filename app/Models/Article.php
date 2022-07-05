@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @mixin Builder
@@ -34,12 +36,32 @@ class Article extends Model
 
     public static function getAllPublicArticles()
     {
-        return static::with('tags')->where('public', '=', 1)->latest('created_at')->get();
+        return static::latest('created_at')->get();
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::updating(function (Article $article) {
+
+            $now = $article->getDirty();
+
+            $article->history()->attach(Auth::user()->id, [
+                'before' => json_encode(Arr::only($article->fresh()->toArray(), array_keys($now))),
+                'now' => json_encode($now),
+            ]);
+        });
     }
 
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     public function owner()
@@ -52,5 +74,11 @@ class Article extends Model
         $start = Carbon::now()->subWeek()->startOfWeek();
         $end = Carbon::now()->subWeek()->endOfWeek();
         return static::where('public', '=', 1)->whereBetween('created_at', [$start, $end])->get();
+    }
+
+    public function history()
+    {
+        return $this->belongsToMany(User::class, 'article_histories')
+            ->withPivot(['before', 'now'])->withTimestamps();
     }
 }

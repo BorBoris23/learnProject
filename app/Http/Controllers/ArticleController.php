@@ -92,11 +92,6 @@ class ArticleController extends Controller
         return $this->redirect('Article deleted');
     }
 
-    private function redirect($message)
-    {
-        return redirect('/')->with('message', $message);
-    }
-
     private function publish(Article $article, $public)
     {
         if($public === 'on') {
@@ -105,10 +100,5 @@ class ArticleController extends Controller
             $article->public = 0;
         }
         $article->save();
-    }
-
-    private function send(PushAll $pushAll,Article $article)
-    {
-        $pushAll->send('new article created', $article->header);
     }
 }
