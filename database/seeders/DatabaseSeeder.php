@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             ArticleTagSeeder::class,
             UserRoleSeeder::class,
             CommentsSeeder::class,
+            NewsSeeder::class,
         ]);
     }
 }

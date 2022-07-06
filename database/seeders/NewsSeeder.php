@@ -2,12 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Article;
-use App\Models\Comment;
+use App\Models\News;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class ArticlesSeeder extends Seeder
+class NewsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,8 +14,8 @@ class ArticlesSeeder extends Seeder
      */
     public function run()
     {
-        Article::factory()
-            ->count(50)
+        News::factory()
+            ->count(100)
             ->create();
     }
 }

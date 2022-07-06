@@ -29,7 +29,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         $gate->before(function($user) {
-            if($user->email === 'admin@mail.ru') {
+            if(in_array('admin', $user->getAllUserRoleNames())) {
                 return true;
             }
         });

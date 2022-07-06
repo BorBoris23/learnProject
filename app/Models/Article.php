@@ -31,12 +31,12 @@ class Article extends Model
 
     public static function getAllArticles()
     {
-        return static::latest('created_at')->get();
+        return static::latest('created_at')->paginate(20);
     }
 
     public static function getAllPublicArticles()
     {
-        return static::latest('created_at')->get();
+        return static::latest('created_at')->paginate(10);
     }
 
     protected static function boot()

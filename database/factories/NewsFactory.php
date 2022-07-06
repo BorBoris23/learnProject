@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CommentFactory extends Factory
+class NewsFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,9 +14,8 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            'commentText' => $this->faker->sentence($nbWords = 10, $variableNbWords = true),
-            'owner_id' => $this->faker->numberBetween($min = 2, $max = 10),
-            'article_id' => $this->faker->numberBetween($min = 1, $max = 50),
+            'header' => $this->faker->sentence($nbWords = 3, $variableNbWords = true),
+            'content' => $this->faker->text(),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ];

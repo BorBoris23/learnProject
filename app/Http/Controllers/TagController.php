@@ -9,7 +9,7 @@ class TagController extends Controller
 {
     public function index(Tag $tag)
     {
-        $articles = (new Tag)->getAllArticlesByTag($tag);
+        $articles = Tag::getAllArticlesByTag($tag);
 
         return view('index', compact('articles'));
     }

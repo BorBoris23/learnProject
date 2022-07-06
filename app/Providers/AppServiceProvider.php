@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Tag;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -33,6 +34,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('admin', function () {
             return '<a class="p-2 link-secondary" href="/admin">Admin</a>';
         });
+
+        Paginator::defaultView('pagination::bootstrap-4');
     }
 }
 
