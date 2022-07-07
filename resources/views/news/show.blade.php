@@ -13,7 +13,7 @@
     <div>
         <a href="/news">Go back</a>
     </div>
-@can('destroy', $news)
+@can('null')
     <form method="POST" action="/news/{{$news->id}}">
 
         @csrf

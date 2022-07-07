@@ -35,9 +35,9 @@
             <a class="p-2 link-secondary" href="/news">News</a>
             <a class="p-2 link-secondary" href="/contact">Contact</a>
             <a class="p-2 link-secondary" href="/article/create">Created article</a>
-            @if(isset($user) && in_array('admin', $user->roles()->pluck('name')->toArray()))
-            @admin()
-            @endif
+            @can('null')
+                @admin()
+            @endcan
         </nav>
     </div>
 </div>

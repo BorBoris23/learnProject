@@ -30,7 +30,7 @@ class AdminController extends Controller
 
     public function showNews()
     {
-        $news = News::getAllNews();
+        $news = News::getAllNews()->paginate(20);
 
         return view('admin.newsControl', compact('news'));
     }

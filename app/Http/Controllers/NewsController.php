@@ -10,7 +10,7 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $news = News::getAllNews();
+        $news = News::getAllNews()->paginate(10);
 
         return view('news', compact('news'));
     }
@@ -24,12 +24,6 @@ class NewsController extends Controller
         return $this->redirect('News add');
     }
 
-//    /**
-//     * Display the specified resource.
-//     *
-//     * @param  int  $id
-//     * @return \Illuminate\Http\Response
-//     */
     public function show(News $news)
     {
         return view('news.show', compact('news'));
@@ -52,12 +46,12 @@ class NewsController extends Controller
         //
     }
 
-//    /**
-//     * Remove the specified resource from storage.
-//     *
-//     * @param  int  $id
-//     * @return \Illuminate\Http\Response
-//     */
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(News $news)
     {
         $news->delete();

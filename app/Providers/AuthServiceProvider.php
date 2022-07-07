@@ -28,8 +28,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        $gate->before(function($user) {
-            if(in_array('admin', $user->getAllUserRoleNames())) {
+        $gate->before(function ($user) {
+            if($user->isUserAdmin()) {
                 return true;
             }
         });

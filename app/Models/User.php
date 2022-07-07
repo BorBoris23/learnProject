@@ -53,7 +53,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
-    public function getAllUserRoleNames()
+    private function getAllUserRoleNames()
     {
         return User::roles()->pluck('name')->toArray();
     }
@@ -61,5 +61,12 @@ class User extends Authenticatable
     public static function getAllUsers()
     {
         return static::where('name', '!=', 'admin')->get();
+    }
+
+    public function isUserAdmin()
+    {
+        if(in_array('admin', $this->getAllUserRoleNames())) {
+            return true;
+        }
     }
 }

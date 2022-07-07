@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
 /**
  * @mixin Builder
  */
@@ -18,6 +17,6 @@ class News extends Model
 
     public static function getAllNews()
     {
-        return static::latest('created_at')->paginate(20);
+        return static::latest('created_at');
     }
 }
