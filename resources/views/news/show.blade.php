@@ -13,7 +13,7 @@
     <div>
         <a href="/news">Go back</a>
     </div>
-@can('null')
+@can('isAdmin', \Illuminate\Support\Facades\Auth::user())
     <form method="POST" action="/news/{{$news->id}}">
 
         @csrf

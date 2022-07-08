@@ -35,7 +35,7 @@
             <a class="p-2 link-secondary" href="/news">News</a>
             <a class="p-2 link-secondary" href="/contact">Contact</a>
             <a class="p-2 link-secondary" href="/article/create">Created article</a>
-            @can('null')
+            @can('isAdmin', \Illuminate\Support\Facades\Auth::user())
                 @admin()
             @endcan
         </nav>

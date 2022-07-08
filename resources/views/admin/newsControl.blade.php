@@ -8,8 +8,5 @@
 
     </article>
 
-    <nav class="blog-pagination" aria-label="Pagination">
-        <a class="btn btn-outline-primary" href="#">Older</a>
-        <a class="btn btn-outline-secondary disabled">Newer</a>
-    </nav>
+    {{ $news->onEachSide(1)->links() }}
 @endsection
