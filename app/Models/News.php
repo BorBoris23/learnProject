@@ -19,4 +19,9 @@ class News extends Model
     {
         return static::latest('created_at');
     }
+
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
 }

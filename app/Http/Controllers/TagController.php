@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
-use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
@@ -12,5 +11,12 @@ class TagController extends Controller
         $articles = Tag::getAllArticlesByTag($tag);
 
         return view('index', compact('articles'));
+    }
+
+    public function indexNews(Tag $tag)
+    {
+        $news = Tag::getAllNewsByTag($tag);
+
+        return view('news', compact('news'));
     }
 }

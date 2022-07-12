@@ -13,7 +13,10 @@
     <div>
         <a href="/news">Go back</a>
     </div>
-@can('isAdmin', \Illuminate\Support\Facades\Auth::user())
+
+    @include('layout.tags', ['tags' => $news->tags])
+
+@can('isAdmin', $authUser)
     <form method="POST" action="/news/{{$news->id}}">
 
         @csrf

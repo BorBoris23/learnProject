@@ -34,8 +34,9 @@
             <a class="p-2 link-secondary" href="/about">About Us</a>
             <a class="p-2 link-secondary" href="/news">News</a>
             <a class="p-2 link-secondary" href="/contact">Contact</a>
+            <a class="p-2 link-secondary" href="/statistics">Statistics</a>
             <a class="p-2 link-secondary" href="/article/create">Created article</a>
-            @can('isAdmin', \Illuminate\Support\Facades\Auth::user())
+            @can('isAdmin', $authUser)
                 @admin()
             @endcan
         </nav>

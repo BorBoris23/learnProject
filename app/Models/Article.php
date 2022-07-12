@@ -36,7 +36,7 @@ class Article extends Model
 
     public static function getAllPublicArticles()
     {
-        return static::latest('created_at')->paginate(10);
+        return static::where('public', '=', 1)->latest('created_at')->paginate(10);
     }
 
     protected static function boot()
@@ -56,7 +56,7 @@ class Article extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 
     public function comments()

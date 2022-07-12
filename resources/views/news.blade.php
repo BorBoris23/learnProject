@@ -1,4 +1,4 @@
-@extends('layout.without_sidebar')
+@extends('layout.master')
 
 @section('content')
     <article class="blog-post">

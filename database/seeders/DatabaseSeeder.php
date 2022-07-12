@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             ArticlesSeeder::class,
             AppealsSeeder::class,
             TagsSeeder::class,
-            ArticleTagSeeder::class,
+            TaggeableSeeder::class,
             UserRoleSeeder::class,
             CommentsSeeder::class,
             NewsSeeder::class,

@@ -53,6 +53,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
+    public function articles()
+    {
+        return $this->hasMany(Article::class, 'owner_id');
+    }
+
     private function getAllUserRoleNames()
     {
         return User::roles()->pluck('name')->toArray();

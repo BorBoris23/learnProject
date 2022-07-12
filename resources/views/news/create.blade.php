@@ -15,7 +15,17 @@
             <label for="exampleInputContent" class="form-label">Content</label>
             <textarea class="form-control" name="content" id="exampleInputContent" placeholder="Add new content">{{old('content') }}</textarea>
         </div>
-
+        @if(isset($news))
+            <div class="mb-3">
+                <label for="exampleInputHeader" class="form-label">Tags</label>
+                <input type="text" class="form-control" name="tags" id="exampleInputHeader" placeholder="Add new tag" value="{{old('tags', $news->tags->pluck('name')->implode(',') ?? '') }}">
+            </div>
+        @else
+            <div class="mb-3">
+                <label for="exampleInputHeader" class="form-label">Tags</label>
+                <input type="text" class="form-control" name="tags" id="exampleInputHeader" placeholder="Add new tag" value="{{old('tags')}}">
+            </div>
+        @endif
         <button type="submit" class="btn btn-primary">Create news</button>
     </form>
 

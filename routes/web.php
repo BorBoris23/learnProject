@@ -5,6 +5,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\AboutController;
 
 
 Route::get('/articles/tags/{tag}', [TagController::class, 'index']);
+Route::get('/news/tags/{tag}', [TagController::class, 'indexNews']);
 Route::resource('/', ArticleController::class);
 Route::resource('article', ArticleController::class);
 Route::resource('about', AboutController::class);
@@ -36,3 +38,5 @@ Route::resource('contact', ContactController::class);
 
 Route::resource('news', NewsController::class);
 Route::get('admin/createNews/', [NewsController::class, 'created']);
+
+Route::get('/statistics', [StatisticsController::class, 'index']);

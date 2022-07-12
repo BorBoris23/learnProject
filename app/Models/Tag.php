@@ -12,18 +12,28 @@ class Tag extends Model
 {
     protected $guarded = [];
 
+    public static function getAllNewsByTag(Tag $tag)
+    {
+        return $tag->news()->with('tags')->paginate(20);
+    }
+
     public function getAllArticlesByTag(Tag $tag)
     {
-        return $tag->articles()->with('tags')->get();
+        return $tag->articles()->with('tags')->paginate(20);
     }
 
     public function articles()
     {
-        return $this->belongsToMany(Article::class);
+        return $this->morphedByMany(Article::class, 'taggable');
     }
 
-    public static function tagsCloud()
+    public function news()
     {
-        return (new static)->has('articles')->get();
+        return $this->morphedByMany(News::class, 'taggable');
+    }
+
+    public static function tagsCloud($model)
+    {
+        return (new static)->has($model)->get();
     }
 }

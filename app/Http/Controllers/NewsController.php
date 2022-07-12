@@ -4,10 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreNewsRequest;
 use App\Models\News;
+use App\Services\TagsSynchronizer;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
+
+    private $tagService;
+
+    public function __construct(TagsSynchronizer $tagService)
+    {
+        $this->tagService = $tagService;
+    }
+
     public function index()
     {
         $news = News::getAllNews()->paginate(10);
@@ -19,7 +28,11 @@ class NewsController extends Controller
     {
         $validated = $request->validated();
 
-        News::create($validated);
+        $news = News::create($validated);
+
+        $tags = collect(explode(',' , request('tags')))->keyBy(function ($item) { return $item; });
+
+        $this->tagService->sync($tags, $news);
 
         return $this->redirect('News add');
     }
@@ -46,12 +59,6 @@ class NewsController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(News $news)
     {
         $news->delete();
