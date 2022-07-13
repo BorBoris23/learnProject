@@ -1,6 +1,6 @@
 @if($routName === 'article.create')
     <div class="mb-3">
-        <input type="hidden" name="owner_id" value="{{$user->id}}">
+        <input type="hidden" name="owner_id" value="{{$authUser->id}}">
     </div>
 @else
     <div class="mb-3">

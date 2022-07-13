@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -47,6 +48,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function fullNameUserMostArticles()
+    {
+        $groups = DB::table('articles')
+            ->select('owner_id', DB::raw('count(*) as number_articles'))
+            ->groupBy('owner_id')
+            ->orderBy('number_articles', 'DESC')
+            ->get();
+
+        return (User::find($groups[0]->owner_id))->name;
+    }
 
     public function roles()
     {

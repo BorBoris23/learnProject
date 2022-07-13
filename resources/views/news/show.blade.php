@@ -14,7 +14,7 @@
         <a href="/news">Go back</a>
     </div>
 
-    @include('layout.tags', ['tags' => $news->tags])
+    @include('layout.newsTags', ['tags' => $news->tags])
 
 @can('isAdmin', $authUser)
     <form method="POST" action="/news/{{$news->id}}">
