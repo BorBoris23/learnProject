@@ -49,6 +49,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public static function countUsers()
+    {
+        return DB::table('users')->count();
+    }
+
     public static function fullNameUserMostArticles()
     {
         $groups = DB::table('articles')
@@ -82,8 +87,10 @@ class User extends Authenticatable
 
     public function isUserAdmin()
     {
-        if(in_array('admin', $this->getAllUserRoleNames())) {
+        if (in_array('admin', $this->getAllUserRoleNames())) {
             return true;
         }
+
+        return false;
     }
 }

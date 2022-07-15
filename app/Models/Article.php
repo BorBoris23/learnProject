@@ -73,6 +73,7 @@ class Article extends AbstractModel
     {
         $start = Carbon::now()->subWeek()->startOfWeek();
         $end = Carbon::now()->subWeek()->endOfWeek();
+
         return static::where('public', '=', 1)->whereBetween('created_at', [$start, $end])->get();
     }
 
@@ -117,6 +118,7 @@ class Article extends AbstractModel
         foreach ($groups as $group) {
             $numberArticles[] = $group->number_articles;
         }
+
         return round(array_sum($numberArticles) / count($groups));
     }
 }

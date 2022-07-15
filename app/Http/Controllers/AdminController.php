@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Appeal;
 use App\Models\Article;
 use App\Models\News;
-use Illuminate\Foundation\Http\FormRequest;
 
 class AdminController extends Controller
 {

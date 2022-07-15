@@ -5,8 +5,10 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\TagController;
+use App\Jobs\CountInfoReport;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
 
@@ -19,7 +21,6 @@ use App\Http\Controllers\AboutController;
  * PATCH /article/1 (update)
  * DELETE /article/1 (destroy)
  */
-
 
 Route::get('/articles/tags/{tag}', [TagController::class, 'index']);
 Route::get('/news/tags/{tag}', [TagController::class, 'indexNews']);
@@ -40,3 +41,11 @@ Route::resource('news', NewsController::class);
 Route::get('admin/createNews/', [NewsController::class, 'created']);
 
 Route::get('/statistics', [StatisticsController::class, 'index']);
+
+Route::get('admin/report', [ReportController::class, 'index']);
+
+Route::post('admin/report', function () {
+    CountInfoReport::dispatchSync(request()->all());
+});
+
+//Route::post('admin/report', [ReportController::class, 'handleReportRequest']);

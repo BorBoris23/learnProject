@@ -87,7 +87,7 @@ class ArticleController extends Controller
 
     private function publish(Article $article, $public)
     {
-        if($public === 'on') {
+        if ($public === 'on') {
             $article->public = 1;
         } else {
             $article->public = 0;

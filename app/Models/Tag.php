@@ -3,12 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * @mixin Builder
  */
-class Tag extends Model
+class Tag extends AbstractModel
 {
     protected $guarded = [];
 
@@ -17,7 +16,7 @@ class Tag extends Model
         return $tag->news()->with('tags')->paginate(20);
     }
 
-    public function getAllArticlesByTag(Tag $tag)
+    public static function getAllArticlesByTag(Tag $tag)
     {
         return $tag->articles()->with('tags')->paginate(20);
     }

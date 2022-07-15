@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\ReportController;
 use App\Models\Article;
 use App\Models\News;
 use App\Models\Tag;

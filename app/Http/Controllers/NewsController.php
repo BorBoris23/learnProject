@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreNewsRequest;
 use App\Models\News;
 use App\Services\TagsSynchronizer;
-use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-
     private $tagService;
 
     public function __construct(TagsSynchronizer $tagService)
@@ -45,18 +43,6 @@ class NewsController extends Controller
     public function created()
     {
         return view('news.create');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     public function destroy(News $news)
