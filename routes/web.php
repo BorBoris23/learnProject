@@ -8,7 +8,6 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\TagController;
-use App\Jobs\CountInfoReport;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
 
@@ -36,16 +35,13 @@ Route::get('admin/articleControl/', [AdminController::class, 'showArticles']);
 Route::get('admin/newsControl/', [AdminController::class, 'showNews']);
 
 Route::resource('contact', ContactController::class);
-
 Route::resource('news', NewsController::class);
+
 Route::get('admin/createNews/', [NewsController::class, 'created']);
-
 Route::get('/statistics', [StatisticsController::class, 'index']);
-
 Route::get('admin/report', [ReportController::class, 'index']);
+Route::post('admin/report', [ReportController::class, 'generateReport']);
 
-Route::post('admin/report', function () {
-    CountInfoReport::dispatchSync(request()->all());
+Route::get('/test', function () {
+    event(new \App\Events\Article\ArticleChange('it is ok'));
 });
-
-//Route::post('admin/report', [ReportController::class, 'handleReportRequest']);

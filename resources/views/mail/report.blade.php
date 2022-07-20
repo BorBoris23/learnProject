@@ -1,4 +1,4 @@
-
+@component('mail::message')
     @if(isset($data['countArticles']))
         <p>count articles - {{$data['countArticles']}}</p>
     @endif
@@ -14,5 +14,11 @@
     @if(isset($data['countTags']))
         <p>count tags - {{$data['countTags']}}</p>
     @endif
+@endcomponent
+
+
+
+
+
 
 

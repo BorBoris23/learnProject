@@ -75,7 +75,6 @@ class ArticleController extends Controller
         $this->tagService->sync($tags, $article);
 
         return $this->redirect('Article updated');
-
     }
 
     public function destroy(Article $article)

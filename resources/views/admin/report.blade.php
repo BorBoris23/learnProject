@@ -1,10 +1,7 @@
 @extends('layout.without_sidebar')
 @section('content')
-
 <form method="POST">
-
     @csrf
-
     <div class="form-check">
         <input class="form-check-input" type="checkbox" name="articles" id="flexCheckDefault">
         <label class="form-check-label" for="flexCheckDefault">
@@ -35,13 +32,9 @@
             Add tags report
         </label>
     </div>
-
 {{--    <button type="submit"><a class="btn btn-primary" href="mail/report">Generate a report</a></button>--}}
-    <button type="submit">Generate a report</button>
-
+    <button class="btn btn-primary" type="submit">Generate a report</button>
 </form>
-
-<a class="btn btn-primary" href="/mail/report">Generate a report</a>
-
+{{--<a class="btn btn-primary" href="/mail/report">Generate a report</a>--}}
 @endsection
 

@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Report;
+use App\Http\Requests\StoreReportRequest;
+use App\Jobs\CountInfoReport;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
-    public $report;
-
-    public function __construct()
-    {
-        $this->report = new Report();
-    }
-
     public function index()
     {
         return view('admin.report');
+    }
+
+    public function generateReport(StoreReportRequest $request)
+    {
+        dispatch(new CountInfoReport($request->all(), Auth::user()));
+
+        return redirect('/admin/report');
     }
 }

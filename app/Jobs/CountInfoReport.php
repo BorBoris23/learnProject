@@ -2,10 +2,10 @@
 
 namespace App\Jobs;
 
+use App\Mail\InfoReport;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\News;
-use App\Models\Report;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
@@ -13,6 +13,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Mail;
+
 
 class CountInfoReport implements ShouldQueue
 {
@@ -21,32 +23,34 @@ class CountInfoReport implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
+    public $data = [];
     public $request;
+    public $user;
 
-
-    public function __construct($request)
+    public function __construct($request, $user)
     {
         $this->request = $request;
+        $this->user = $user;
     }
 
     public function handle()
     {
         if(isset($this->request['articles'])) {
-            $data['countArticles'] = Article::numberItems('articles');
+            $this->data['countArticles'] = Article::numberItems('articles');
         }
         if(isset($this->request['news'])) {
-            $data['countNews'] = News::numberItems('news');
+            $this->data['countNews'] = News::numberItems('news');
         }
         if(isset($this->request['users'])) {
-            $data['countUsers'] = User::countUsers();
+            $this->data['countUsers'] = User::countUsers();
         }
         if(isset($this->request['comments'])) {
-            $data['countComments'] = Comment::numberItems('comments');
+            $this->data['countComments'] = Comment::numberItems('comments');
         }
         if(isset($this->request['tags'])) {
-            $data['countTags'] = Tag::numberItems('tags');
+            $this->data['countTags'] = Tag::numberItems('tags');
         }
 
-        echo view('mail.report', compact('data'));
+        Mail::to($this->user->email)->send(new InfoReport($this->data));
     }
 }
