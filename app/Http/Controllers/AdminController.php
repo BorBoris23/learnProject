@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appeal;
 use App\Models\Article;
-use Illuminate\Foundation\Http\FormRequest;
-
+use App\Models\News;
 
 class AdminController extends Controller
 {
@@ -25,11 +24,13 @@ class AdminController extends Controller
     {
         $articles = Article::getAllArticles();
 
-        return view('admin.articleСontrol', compact('articles'));
+        return view('admin.articleControl', compact('articles'));
     }
 
-    public function publicArticle(Article $article, FormRequest $request)
+    public function showNews()
     {
-        dd($request);
+        $news = News::getAllNews()->paginate(20);
+
+        return view('admin.newsControl', compact('news'));
     }
 }

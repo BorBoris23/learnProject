@@ -15,8 +15,8 @@ class CommentFactory extends Factory
     {
         return [
             'commentText' => $this->faker->sentence($nbWords = 10, $variableNbWords = true),
-            'owner_id' => $this->faker->randomElement($array = array (2,3,4,5,6,7,8,9)),
-            'article_id' => $this->faker->randomElement($array = array (2,3,4,5,6,7,8,9)),
+            'owner_id' => $this->faker->numberBetween($min = 2, $max = 10),
+            'article_id' => $this->faker->numberBetween($min = 1, $max = 50),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ];

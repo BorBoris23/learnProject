@@ -20,7 +20,7 @@ class ArticleFactory extends Factory
             'content' => $this->faker->text(),
             'uniqueCode' => $this->faker->unique()->word(),
             'owner_id' => $this->faker->randomElement($array = array (2,3,4,5,6,7,8,9)),
-            'public' => array_rand(['yes', 'no']),
+            'public' => 1,
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ];

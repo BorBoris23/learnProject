@@ -1,8 +1,8 @@
 @tailwind base;
 @tailwind components;
+@tailwind utilities;
 
 /* stylelint-disable selector-list-comma-newline-after */
-
 .blog-header {
     line-height: 1;
     border-bottom: 1px solid #e5e5e5;
@@ -111,11 +111,25 @@ h1, h2, h3, h4, h5, h6 {
     border-color: #0d6efd;
 }
 
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
 a {
     color: #0d6efd;
     text-decoration: underline;
 }
 
-@tailwind utilities;
+h3 {
+    font-size: 1.75rem;
+    margin-top: 15px;
+}
+
+p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
 

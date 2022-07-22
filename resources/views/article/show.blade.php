@@ -7,7 +7,7 @@
             <p class="blog-post-meta">{{$article->created_at}}</p>
             <p>Author - User</p>
             <p>{{$article->content}}</p>
-            @include('article.tags', ['tags' => $article->tags])
+            @include('layout.articlesTags', ['tags' => $article->tags])
             <hr>
             @include('comment.show', ['comments' => $article->comments()->get()])
             <hr>
