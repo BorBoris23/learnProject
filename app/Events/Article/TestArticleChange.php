@@ -10,20 +10,22 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ArticleChange implements ShouldBroadcast
+class TestArticleChange implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
-    public $articleChanges;
+    public $changes;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($articleChanges)
+    public function __construct($changes)
     {
-        $this->articleChanges = $articleChanges;
+        $this->changes = $changes;
     }
 
     /**
@@ -33,6 +35,9 @@ class ArticleChange implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('articleChanges');
+        return new Channel('test');
     }
 }
+
+
+
