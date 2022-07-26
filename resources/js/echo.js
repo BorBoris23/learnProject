@@ -1,6 +1,6 @@
 Echo
-    .channel('test')
-    .listen('TestArticleChange', (e) => {
-       console.log(e.changes);
+    .channel('whatChanged')
+    .listen('.event.articlesChanges', (e) => {
+        alert(e.title);
     });
 

@@ -1,6 +1,6 @@
 <?php
 
-use App\Events\Article\TestArticleChange;
+use App\Events\Article\ArticleChange;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
@@ -44,8 +44,6 @@ Route::get('/statistics', [StatisticsController::class, 'index']);
 Route::get('admin/report', [ReportController::class, 'index']);
 Route::post('admin/report', [ReportController::class, 'generateReport']);
 
-Route::get('test', function () {
-//    TestArticleChange::dispatch('it is ok');
-
-    event(new TestArticleChange('top top top'));
-});
+//Route::get('/test', function () {
+//    event(new ArticleChange());
+//});

@@ -2171,20 +2171,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.io = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'socket.io',
-  host: window.location.hostname + ':6005'
-}); // import Echo from "laravel-echo";
-// import Pusher from 'pusher-js';
-//
-// window.Pusher =  Pusher;
-//
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: 'ABCDEFG',
-//     wsHost: window.location.hostname,
-//     wsPort: 6001,
-//     forceTLS: false,
-//     disableStats: true,
-// });
+  host: window.location.hostname + ':6005',
+  authEndpoint: "/broadcasting/auth"
+});
 
 /***/ }),
 
@@ -2194,8 +2183,8 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   \******************************/
 /***/ (() => {
 
-Echo.channel('test').listen('TestArticleChange', function (e) {
-  console.log(e.changes);
+Echo.channel('whatChanged').listen('.event.articlesChanges', function (e) {
+  alert(e.title);
 });
 
 /***/ }),

@@ -2,6 +2,7 @@
 
 namespace App\Events\Article;
 
+use App\Models\Article;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -10,22 +11,22 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class TestArticleChange implements ShouldBroadcast
+class ArticleChange implements ShouldBroadcast
 {
     use Dispatchable;
     use InteractsWithSockets;
     use SerializesModels;
 
-    public $changes;
+    public $article;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($changes)
+    public function __construct(Article $article)
     {
-        $this->changes = $changes;
+        $this->article = $article;
     }
 
     /**
@@ -35,7 +36,20 @@ class TestArticleChange implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('test');
+        return new Channel('whatChanged');
+    }
+
+    public function broadcastAs()
+    {
+        return 'event.articlesChanges';
+    }
+
+    public function broadcastWith()
+    {
+        return [
+            'title' => $this->article->header,
+            'articleId' => $this->article->id,
+        ];
     }
 }
 

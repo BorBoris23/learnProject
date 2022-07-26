@@ -26,7 +26,7 @@ class Article extends AbstractModel
     protected $dispatchesEvents = [
         'created' => ArticleCreated::class,
         'deleted' => ArticleDestroy::class,
-        'updated' => ArticleEdit::class,
+//        'updated' => ArticleEdit::class,
     ];
 
     public static function getAllArticles()

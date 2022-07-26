@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Article\ArticleChange;
+use App\Events\Article\ArticleEdit;
 use App\Http\Requests\StoreArticleRequest;
 use App\Models\Article;
 use App\Services\PushAll;
@@ -67,6 +69,9 @@ class ArticleController extends Controller
         $validated = $request->validated();
 
         $article->update($validated);
+
+        ArticleChange::dispatch($article);
+        ArticleEdit::dispatch($article);
 
         $this->publish($article, $request['public']);
 
