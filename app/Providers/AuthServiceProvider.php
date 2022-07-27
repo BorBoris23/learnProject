@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Article;
+use App\Models\User;
 use App\Policies\ArticlePolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 //use Illuminate\Support\Facades\Gate;
 use Illuminate\Contracts\Auth\Access\Gate;
@@ -17,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Article::class => ArticlePolicy::class,
+        User::class => UserPolicy::class
     ];
 
     /**
@@ -28,8 +31,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        $gate->before(function($user) {
-            if($user->email === 'admin@mail.ru') {
+        $gate->before(function ($user) {
+            if($user->isUserAdmin()) {
                 return true;
             }
         });

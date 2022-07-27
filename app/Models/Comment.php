@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * @mixin Builder
  */
-class Comment extends Model
+class Comment extends AbstractModel
 {
     use HasFactory;
 
@@ -20,4 +19,3 @@ class Comment extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
 }
-

@@ -11,6 +11,6 @@ class EditArticle extends ArticleMail
      */
     public function build()
     {
-        return $this->markdown('notify.article_edit');
+        return $this->view('notify.article_edit');
     }
 }

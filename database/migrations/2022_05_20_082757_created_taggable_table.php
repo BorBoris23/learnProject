@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatedTagArticleTable extends Migration
+class CreatedTaggableTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreatedTagArticleTable extends Migration
      */
     public function up()
     {
-        Schema::create('article_tag', function (Blueprint $table) {
-            $table->foreignId('article_id');
+        Schema::create('taggables', function (Blueprint $table) {
             $table->foreignId('tag_id');
-            $table->primary(['article_id', 'tag_id']);
-            $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
+            $table->morphs('taggable');
+            $table->primary(['tag_id', 'taggable_id', 'taggable_type']);
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     }
@@ -29,6 +28,6 @@ class CreatedTagArticleTable extends Migration
      */
     public function down()
     {
-        Schema::drop('tag_article');
+        Schema::drop('taggables');
     }
 }

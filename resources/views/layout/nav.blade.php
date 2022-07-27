@@ -32,11 +32,13 @@
         <nav class="nav d-flex justify-content-between">
             <a class="p-2 link-secondary" href="/">Main</a>
             <a class="p-2 link-secondary" href="/about">About Us</a>
+            <a class="p-2 link-secondary" href="/news">News</a>
             <a class="p-2 link-secondary" href="/contact">Contact</a>
+            <a class="p-2 link-secondary" href="/statistics">Statistics</a>
             <a class="p-2 link-secondary" href="/article/create">Created article</a>
-            @if(isset($user) && in_array('admin', $user->roles()->pluck('name')->toArray()))
-            @admin()
-            @endif
+            @can('isAdmin', $authUser)
+                @admin()
+            @endcan
         </nav>
     </div>
 </div>

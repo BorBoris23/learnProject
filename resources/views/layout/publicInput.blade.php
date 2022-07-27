@@ -1,12 +1,12 @@
 @if($routName === 'article.create')
     <div class="mb-3">
-        <input type="hidden" name="owner_id" value="{{$user->id}}">
+        <input type="hidden" name="owner_id" value="{{$authUser->id}}">
     </div>
 @else
     <div class="mb-3">
         <input type="hidden" name="owner_id" value="{{$article->owner->id}}">
     </div>
-    @if(in_array('admin', $user->roles()->pluck('name')->toArray()))
+    @can('isAdmin', $authUser)
         <div class="mb-3 form-check">
             @if(isset($article) && $article->public === 1)
                 <input type="checkbox" name="public" class="form-check-input" id="exampleCheck" checked>
@@ -15,7 +15,7 @@
             @endif
             <label class="form-check-label" for="exampleCheck">published</label>
         </div>
-    @endif
+    @endcan
 @endif
 
 

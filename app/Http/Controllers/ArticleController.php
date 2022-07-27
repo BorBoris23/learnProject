@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Article\ArticleChange;
+use App\Events\Article\ArticleEdit;
 use App\Http\Requests\StoreArticleRequest;
 use App\Models\Article;
 use App\Services\PushAll;
 use App\Services\TagsSynchronizer;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 class ArticleController extends Controller
@@ -26,9 +27,7 @@ class ArticleController extends Controller
     {
         $articles = Article::getAllPublicArticles();
 
-        $user = Auth::user();
-
-        return view('index', compact('articles', 'user'));
+        return view('index', compact('articles'));
     }
 
     public function show(Article $article)
@@ -38,11 +37,9 @@ class ArticleController extends Controller
 
     public function create()
     {
-        $user = Auth::user();
-
         $routName = Route::current()->getName();
 
-        return view('article.create', compact('user', 'routName'));
+        return view('article.create', compact('routName'));
     }
 
     public function store(PushAll $pushAll, StoreArticleRequest $request)
@@ -62,11 +59,9 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
-        $user = Auth::user();
-
         $routName = Route::current()->getName();
 
-        return view('article.edit', compact('article', 'user', 'routName'));
+        return view('article.edit', compact('article','routName'));
     }
 
     public function update(Article $article, StoreArticleRequest $request)
@@ -75,6 +70,9 @@ class ArticleController extends Controller
 
         $article->update($validated);
 
+        ArticleChange::dispatch($article);
+        ArticleEdit::dispatch($article);
+
         $this->publish($article, $request['public']);
 
         $tags = collect(explode(',' , request('tags')))->keyBy(function ($item) { return $item; });
@@ -82,7 +80,6 @@ class ArticleController extends Controller
         $this->tagService->sync($tags, $article);
 
         return $this->redirect('Article updated');
-
     }
 
     public function destroy(Article $article)
@@ -94,7 +91,7 @@ class ArticleController extends Controller
 
     private function publish(Article $article, $public)
     {
-        if($public === 'on') {
+        if ($public === 'on') {
             $article->public = 1;
         } else {
             $article->public = 0;

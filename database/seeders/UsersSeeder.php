@@ -23,6 +23,14 @@ class UsersSeeder extends Seeder
             'updated_at' => date("Y-m-d H:i:s")
         ]);
 
+        DB::table('users')->insert([
+            'name' => 'Test',
+            'email' => 'sergio@mail.ru',
+            'password' => bcrypt('123'),
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s")
+        ]);
+
         User::factory()
             ->count(10)
             ->create();
