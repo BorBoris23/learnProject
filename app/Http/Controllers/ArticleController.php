@@ -71,7 +71,7 @@ class ArticleController extends Controller
         $article->update($validated);
 
         ArticleChange::dispatch($article);
-        ArticleEdit::dispatch($article);
+//        ArticleEdit::dispatch($article);
 
         $this->publish($article, $request['public']);
 
