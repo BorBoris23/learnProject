@@ -3,4 +3,3 @@ Echo
     .listen('.event.articlesChanges', (e) => {
         alert(e.title);
     });
-
